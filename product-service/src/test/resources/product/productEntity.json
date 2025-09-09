@@ -1,0 +1,7 @@
+{
+  "name": "test-product",
+  "description": "test-product",
+  "price": 200,
+  "stockQuantity": 5,
+  "imageName": "test-product-image.jpg"
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "test-product-0",
+    "description": "test-product-0",
+    "price": 100,
+    "stockQuantity": 1,
+    "imageName": "test-product-0-image.jpg"
+  },
+  {
+    "name": "test-product-1",
+    "description": "test-product-1",
+    "price": 300,
+    "stockQuantity": 3,
+    "imageName": "test-product-1-image.jpg"
+  },
+  {
+    "name": "test-product-2",
+    "description": "test-product-2",
+    "price": 200,
+    "stockQuantity": 5,
+    "imageName": "test-product-2-image.jpg"
+  }
+]

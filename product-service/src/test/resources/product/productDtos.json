@@ -1,0 +1,26 @@
+[
+  {
+    "name": "test-product-0",
+    "description": "test-product-0",
+    "category": "test-category",
+    "price": 100.00,
+    "stockQuantity": 1,
+    "imageName": "test-product-0-image.jpg"
+  },
+  {
+    "name": "test-product-1",
+    "description": "test-product-1",
+    "category": "test-category",
+    "price": 300.00,
+    "stockQuantity": 3,
+    "imageName": "test-product-1-image.jpg"
+  },
+  {
+    "name": "test-product-2",
+    "description": "test-product-2",
+    "category": "test-category",
+    "price": 200.00,
+    "stockQuantity": 5,
+    "imageName": "test-product-2-image.jpg"
+  }
+]

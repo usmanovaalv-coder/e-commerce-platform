@@ -1,0 +1,49 @@
+server:
+  port: 8082
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: user-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8081
+
+  cloud:
+    discovery:
+      enabled: true
+      client:
+        simple:
+          local:
+            service-id: user-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/common_db?currentSchema=user_schema
+    username: username
+    password: password
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: user_schema
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    default_schema: user_schema
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000

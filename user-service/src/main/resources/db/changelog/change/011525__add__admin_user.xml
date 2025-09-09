@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="admin">
+        <preConditions>
+            <tableExists tableName="user"/>
+        </preConditions>
+
+        <insert tableName="user">
+            <column name="user_name" value="admin"/>
+            <column name="email" value="admin@example.com"/>
+            <column name="phone" value="+79990001122"/>
+            <column name="address" value="Jl. Tegal Sari No.19, Canggu, Kec. Kuta Utara, Kabupaten Badung, Bali 80361"/>
+            <column name="password" value="$2a$12$LVGOIV0qech5VRIMH9Lzru3DvfqISe6MksnewvD7NwSpf0qMRDvD6"/> <!--123123 -->
+            <column name="created" valueDate="2025-01-15T12:00:00"/>
+            <column name="updated" valueDate="2025-01-15T12:00:00"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
