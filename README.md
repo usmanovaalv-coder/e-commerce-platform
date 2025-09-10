@@ -20,7 +20,6 @@ flowchart LR
   UI --> USER[user-service :8082]
   UI --> PROD[product-service :8083]
   UI --> ORDER[order-service :8084]
-  UI --> NOTIF[notification-service :8085]
 
   %% Sync calls (Feign via Eureka)
   AUTH -- Feign --> USER
@@ -47,7 +46,7 @@ flowchart LR
   USER  <--> EUREKA
   PROD  <--> EUREKA
   ORDER <--> EUREKA
-  NOTIF <--> EUREKA
+  NOTIF --> EUREKA
 ```
 
 ---
@@ -267,7 +266,6 @@ flowchart LR
   UI --> USER[user-service :8082]
   UI --> PROD[product-service :8083]
   UI --> ORDER[order-service :8084]
-  UI --> NOTIF[notification-service :8085]
 
   %% Sync calls (Feign via Eureka)
   AUTH -- Feign --> USER
@@ -294,7 +292,7 @@ flowchart LR
   USER  <--> EUREKA
   PROD  <--> EUREKA
   ORDER <--> EUREKA
-  NOTIF <--> EUREKA
+  NOTIF --> EUREKA
 ```
 
 ---
