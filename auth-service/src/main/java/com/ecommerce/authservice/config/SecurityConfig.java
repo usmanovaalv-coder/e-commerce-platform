@@ -1,8 +1,6 @@
 package com.ecommerce.authservice.config;
 
 import com.ecommerce.authservice.service.CustomUserDetailsService;
-import lombok.AccessLevel;
-import lombok.experimental.FieldDefaults;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,7 +29,12 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/oauth2/token").permitAll()
+                        .requestMatchers(
+                                "/oauth2/token",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

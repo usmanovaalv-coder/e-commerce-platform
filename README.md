@@ -171,6 +171,25 @@ mvn -pl auth-service spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
 ---
+## API Docs (OpenAPI / Swagger UI)
+
+The project uses **springdoc-openapi** (OpenAPI 3 + Swagger UI) in each service.
+
+- Swagger UI:
+    - Auth: `http://localhost:8081/swagger-ui.html`
+    - User: `http://localhost:8082/swagger-ui.html`
+    - Product: `http://localhost:8083/swagger-ui.html`
+    - Order: `http://localhost:8084/swagger-ui.html`
+    - Notification: `http://localhost:8085/swagger-ui.html`
+- Raw OpenAPI JSON: `http://localhost:<port>/v3/api-docs`
+- Raw OpenAPI YAML: `http://localhost:<port>/v3/api-docs.yaml`
+
+**Security:** protected endpoints require **JWT**.  
+Click **Authorize** in Swagger UI and paste `Bearer <your_jwt_token>` (configured via `@SecurityScheme(name="bearerAuth")`).
+
+**Spring Security note:** OpenAPI/Swagger endpoints are whitelisted:
+/v3/api-docs/, /swagger-ui/, /swagger-ui.html
+---
 
 ## Authentication (JWT)
 
@@ -376,6 +395,29 @@ mvn -pl notification-service spring-boot:run
 ```bash
 mvn -pl auth-service spring-boot:run -Dspring-boot.run.profiles=local
 ```
+
+---
+## Документация API (OpenAPI / Swagger UI)
+
+В каждом сервисе подключён **springdoc-openapi** (OpenAPI 3 + Swagger UI).
+
+**Где открыть Swagger UI (локально):**
+- Auth: `http://localhost:8081/swagger-ui.html`
+- User: `http://localhost:8082/swagger-ui.html`
+- Product: `http://localhost:8083/swagger-ui.html`
+- Order: `http://localhost:8084/swagger-ui.html`
+- Notification: `http://localhost:8085/swagger-ui.html`
+
+**OpenAPI-спецификация:**
+- JSON: `http://localhost:<port>/v3/api-docs`
+- YAML: `http://localhost:<port>/v3/api-docs.yaml`
+
+**Аутентификация (JWT):**
+- Защищённые эндпоинты требуют заголовок `Authorization: Bearer <JWT>`.
+- В Swagger UI нажми **Authorize**, выбери схему **bearerAuth** и вставь токен.
+
+**Исключения в Security для UI/спеки (whitelist):**
+/v3/api-docs/, /swagger-ui/, /swagger-ui.html
 
 ---
 
