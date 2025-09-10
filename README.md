@@ -15,18 +15,39 @@ flowchart LR
     UI[Frontend / Postman]
   end
 
-  UI --> AUTH[auth-service:8081]
-  UI --> USER[user-service:8082]
-  UI --> PROD[product-service:8083]
-  UI --> ORDER[order-service:8084]
-  UI --> NOTIF[notification-service:8085]
+  %% UI entry points
+  UI --> AUTH[auth-service :8081]
+  UI --> USER[user-service :8082]
+  UI --> PROD[product-service :8083]
+  UI --> ORDER[order-service :8084]
+  UI --> NOTIF[notification-service :8085]
 
-  AUTH <-->|Feign| USER
-  ORDER -->|events/REST| NOTIF
-  PROD -->|S3 pre-signed| S3[(AWS S3)]
+  %% Sync calls (Feign via Eureka)
+  AUTH -- Feign --> USER
+  ORDER -- Feign --> USER
+  ORDER -- Feign --> PROD
 
-  AUTH & USER & PROD & ORDER & NOTIF --> PG[(PostgreSQL: common_db<br/>per-service schemas)]
-  AUTH & USER & PROD & ORDER & NOTIF <--> EUREKA[(Eureka:8761)]
+  %% Async notifications (Kafka)
+  ORDER -- events --> KAFKA[(Kafka)]
+  USER  -- events --> KAFKA
+  KAFKA -- consume --> NOTIF
+  NOTIF --> SMS[(SMS Gateway)]
+
+  %% Persistence (only these services use DB)
+  USER  -->|JPA/Liquibase| PG[(PostgreSQL: common_db\nschemas: user/product/order)]
+  PROD  -->|JPA/Liquibase| PG
+  ORDER -->|JPA/Liquibase| PG
+
+  %% S3 pre-signed URLs
+  PROD -->|pre-signed URLs| S3[(AWS S3)]
+  UI -. upload/download via pre-signed .-> S3
+
+  %% Service discovery (all services)
+  AUTH  <--> EUREKA[(Eureka :8761)]
+  USER  <--> EUREKA
+  PROD  <--> EUREKA
+  ORDER <--> EUREKA
+  NOTIF <--> EUREKA
 ```
 
 ---
@@ -241,18 +262,39 @@ flowchart LR
     UI[Frontend / Postman]
   end
 
-  UI --> AUTH[auth-service:8081]
-  UI --> USER[user-service:8082]
-  UI --> PROD[product-service:8083]
-  UI --> ORDER[order-service:8084]
-  UI --> NOTIF[notification-service:8085]
+  %% UI entry points
+  UI --> AUTH[auth-service :8081]
+  UI --> USER[user-service :8082]
+  UI --> PROD[product-service :8083]
+  UI --> ORDER[order-service :8084]
+  UI --> NOTIF[notification-service :8085]
 
-  AUTH <-->|Feign| USER
-  ORDER -->|events/REST| NOTIF
-  PROD -->|S3 pre-signed| S3[(AWS S3)]
+  %% Sync calls (Feign via Eureka)
+  AUTH -- Feign --> USER
+  ORDER -- Feign --> USER
+  ORDER -- Feign --> PROD
 
-  AUTH & USER & PROD & ORDER & NOTIF --> PG[(PostgreSQL: common_db<br/>схемы на сервис)]
-  AUTH & USER & PROD & ORDER & NOTIF <--> EUREKA[(Eureka:8761)]
+  %% Async notifications (Kafka)
+  ORDER -- events --> KAFKA[(Kafka)]
+  USER  -- events --> KAFKA
+  KAFKA -- consume --> NOTIF
+  NOTIF --> SMS[(SMS Gateway)]
+
+  %% Persistence (only these services use DB)
+  USER  -->|JPA/Liquibase| PG[(PostgreSQL: common_db\nschemas: user/product/order)]
+  PROD  -->|JPA/Liquibase| PG
+  ORDER -->|JPA/Liquibase| PG
+
+  %% S3 pre-signed URLs
+  PROD -->|pre-signed URLs| S3[(AWS S3)]
+  UI -. upload/download via pre-signed .-> S3
+
+  %% Service discovery (all services)
+  AUTH  <--> EUREKA[(Eureka :8761)]
+  USER  <--> EUREKA
+  PROD  <--> EUREKA
+  ORDER <--> EUREKA
+  NOTIF <--> EUREKA
 ```
 
 ---
