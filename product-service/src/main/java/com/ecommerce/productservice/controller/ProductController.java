@@ -57,7 +57,7 @@ public class ProductController {
     @PreAuthorize("hasAuthority('CLIENT')")
     @PostMapping("/batch")
     public ResponseEntity<GetProductsResponse> getProductById(@RequestBody @Valid GetProductsRequest request) {
-        GetProductsResponse getProductsResponse = productService.getProductsByIds(request.getProductIds());;
+        GetProductsResponse getProductsResponse = productService.getProductsByIds(request.getProductIds());
         return ResponseEntity.ok(getProductsResponse);
     }
 

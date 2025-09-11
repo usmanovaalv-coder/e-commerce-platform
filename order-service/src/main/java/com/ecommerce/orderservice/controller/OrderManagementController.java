@@ -3,7 +3,6 @@ package com.ecommerce.orderservice.controller;
 import com.ecommerce.orderservice.dto.OrderDto;
 import com.ecommerce.orderservice.enums.OrderStatus;
 import com.ecommerce.orderservice.exception.ApiError;
-import com.ecommerce.orderservice.service.KafkaNotificationProducer;
 import com.ecommerce.orderservice.service.OrderManagementService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -50,7 +49,6 @@ import org.springframework.web.bind.annotation.*;
 public class OrderManagementController {
 
     OrderManagementService orderManagementService;
-    KafkaNotificationProducer producer;
 
     @Operation(
             summary = "Update order status",
