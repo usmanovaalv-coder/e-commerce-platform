@@ -43,7 +43,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
 
         UserDto userDto = userProcessingService.fetchClientData(orderEntity.getUserId());
 
-        /*log.info("Attempting to update order {} from {} to {}", orderId, orderEntity.getStatus(), newStatus);
+        log.info("Attempting to update order {} from {} to {}", orderId, orderEntity.getStatus(), newStatus);
 
         OrderStatusUtils.validateStatusTransition(orderEntity.getStatus(), newStatus);
 
@@ -52,7 +52,7 @@ public class OrderManagementServiceImpl implements OrderManagementService {
         }
 
         orderEntity.setStatus(newStatus);
-        orderRepository.save(orderEntity);*/
+        orderRepository.save(orderEntity);
 
         sendOrderStatusUpdate(orderEntity.getUserId(), orderId, newStatus);
         log.info("Order {} successfully updated to {}", orderId, newStatus);

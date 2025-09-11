@@ -2,6 +2,7 @@ package com.ecommerce.userservice.controller;
 
 import com.ecommerce.userservice.model.GetClientResponse;
 import com.ecommerce.userservice.service.UserService;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static lombok.AccessLevel.PRIVATE;
 
+@Hidden
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/internal/clients")

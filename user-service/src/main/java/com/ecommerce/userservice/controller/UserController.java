@@ -4,6 +4,7 @@ import com.ecommerce.userservice.model.CreateUserRequest;
 import com.ecommerce.userservice.model.CreateUserResponse;
 import com.ecommerce.userservice.model.GetUserResponse;
 import com.ecommerce.userservice.service.UserService;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import static lombok.AccessLevel.PRIVATE;
 
+@Hidden
 @RestController
 @RequestMapping(value = "/api/v1/users")
 @RequiredArgsConstructor
